@@ -279,6 +279,40 @@ object Main {
     var user1 = new User("Max", 28)
     var user2 = new User()
     var user3 = new User("Max")
+
+
+    println("\nLazy Evaluation")
+    println("Delay the evaluation of an expression until its value is needed")
+    println("Whenever a lazy evaluation is used for the first time then only when it's initialized")
+    lazy val l = 9 // Int = <lazy>
+    println(l) // Int = 9
+
+    def method1(n: Int): Unit = {
+      println("Method 1")
+      println(n)
+    }
+
+    // lazy evaluation can also be achieved by using call by name parameter
+    // value of the parameter will be evaluated whenever it will be used within the method
+    def method2(n: => Int): Unit = {
+      println("Method 2")
+      println(n)
+    }
+
+    val add2 = (a: Int, b: Int) => {
+      println("Add")
+      a + b
+    }
+    method1(add2(5, 6))
+    // Add
+    // Method 1
+    // 11
+
+    method2(add2(5, 6))
+    // Method 2
+    // Add
+    // 11
+
   }
 }
 
