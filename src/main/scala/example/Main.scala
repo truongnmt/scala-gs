@@ -313,6 +313,11 @@ object Main {
     // Add
     // 11
 
+
+    println("\nScala Trait")
+    println("Must have at least 1 abstract method," +
+      "can inherit from multiple trait," +
+      "can remove override keyword when implement trait method")
   }
 }
 
