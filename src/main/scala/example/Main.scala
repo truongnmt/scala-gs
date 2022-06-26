@@ -2,6 +2,23 @@ package example
 
 import java.util.Date
 
+// var: getter setter
+// val: getter
+// default: no default getter setter created
+class User(private var name: String, val age: Int) {
+  // Auxiliary constructor must has different signature than all the other constructors
+  // and must call the previously defined constructor
+  def this() {
+    this("Tom", 32)
+  }
+
+  def this(name: String) {
+    this(name, 32)
+  }
+
+  def printName { println(name) }
+}
+
 object Main {
 
   def math(x: Double, y: Double, z: Double, f: (Double, Double) => Double): Double = f(f(x,y), z)
@@ -246,6 +263,22 @@ object Main {
     // scan: give the map of intermediate result
     println(lst3.scanLeft(100)(_ + _)) // List(100, 101, 103, 106, 111, 118, 128, 141)
     println(lst4.scanLeft("z")(_ + _)) // List(z, zA, zAB, zABC)
+
+
+    println("\nScala Classes")
+    // var: getter setter
+    // val: getter
+    // default: no default getter setter created
+    var user = new User("Max", 28)
+    user.printName
+    // user.name // name is private so it can be accessed outsite class
+    println(user.age)
+
+
+    println("\nAuxiliary constructors")
+    var user1 = new User("Max", 28)
+    var user2 = new User()
+    var user3 = new User("Max")
   }
 }
 
