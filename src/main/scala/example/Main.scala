@@ -318,6 +318,56 @@ object Main {
     println("Must have at least 1 abstract method," +
       "can inherit from multiple trait," +
       "can remove override keyword when implement trait method")
+
+
+    println("\nScala pattern matching")
+    case class Person(name: String, age: Int)
+    val bob = Person("Bob", 34)
+
+    val bobGreeting = bob match {
+        case Person(n, a) => s"Hi $n, age $a"
+    }
+
+    // list extractors
+    val numberList = List(1,2,3,42)
+    val mustHaveThree = numberList match {
+      case List(_, _, 3, somethingElse) => s"List has 3 and 4th element is $somethingElse"
+    }
+
+    // haskell-like prepending
+    val startsWithOne = numberList match {
+      case 1 :: tail => s"list starts with one, tail is $tail"
+    }
+
+    // vararg pattern
+    val dontCareAboutTheRest = numberList match {
+      case List(_, 2, _*) => "I only care about the second number being 2"
+    }
+
+    // name binding
+    def requestMoreInfo(p: Person):String = s"The person ${p.name} is a good person."
+    val bobsInfo = bob match {
+      case p @ Person(n, a) => s"$n's info: ${requestMoreInfo(p)}"
+    }
+
+    // conditional guards
+    val ordinal2 = aNumber match {
+      case 1  = "first"
+      case 2  = "second"
+      case 3  = "third"
+      case n if n%10 == 1 => n + "st"
+      case n if n%10 == 2 => n + "nd"
+      case n if n%10 == 3 => n + "rd"
+      case _ => aNumber + "th"
+    }
+
+    // alternative patterns
+    val myOptimalList = numberList match {
+      case List(1, _*) | List(_, _, 3, _*) => "I like this list" // bar operator "|"
+      case _ => "I hate this list"
+    }
+
+
   }
 }
 
