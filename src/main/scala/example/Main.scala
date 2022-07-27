@@ -19,6 +19,15 @@ class User(private var name: String, val age: Int) {
   def printName { println(name) }
 }
 
+
+abstract class Polygon {
+  def area: Double// = 0.0
+}
+
+class Rectangle(var width: Double, var height: Double) extend Polygon {
+  override def area : Double = width * height
+}
+
 object Main {
 
   def math(x: Double, y: Double, z: Double, f: (Double, Double) => Double): Double = f(f(x,y), z)
@@ -35,6 +44,10 @@ object Main {
   val add: Int => Int = (x: Int) => {
     number = x + number
     number
+  }
+
+  def printArea(p: Polygon) {
+    println(p.area)
   }
 
   def main(args: Array[String]): Unit = {
@@ -367,6 +380,14 @@ object Main {
       case _ => "I hate this list"
     }
 
+
+    // super class Polygon doesn't doing any logical thing, we want to restrict the init of super class
+    // need a way to make sure sub class does implement method in super class
+    // abstract method: method doesn’t have body
+    // => abstract class
+    // var poly = new Polygon
+    var rect = new Rectangle(44, 22)
+    printArea(rect)
 
   }
 }
